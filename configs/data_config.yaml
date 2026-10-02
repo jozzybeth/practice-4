@@ -1,0 +1,20 @@
+raw_data_dir: "data/raw"
+processed_data_dir: "data/processed"
+
+train_filename: "train.csv"
+validation_filename: "validation.csv"
+test_filename: "test.csv"
+
+train_sample_size: 3000
+max_length: 512
+
+prompt_template: |
+  Summarize the following dialogue.
+  Write one concise sentence describing the main event or action.
+  Do not add information that is not stated in the dialogue.
+  Output only the summary.
+
+  Dialogue:
+  {dialogue}
+
+  Summary:

@@ -1,0 +1,14 @@
+torch
+transformers
+peft
+trl
+datasets
+pandas
+nltk
+sacrebleu
+rouge-score
+openai
+groq
+click
+pyyaml
+tqdm
