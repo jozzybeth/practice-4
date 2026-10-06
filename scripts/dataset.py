@@ -23,8 +23,8 @@ def build_sft_dataset(
     val_data = val_df[["dialogue", "summary"]].copy()
 
     def format_row(row):
-        prompt = prompt_template.format(dialogue=row["dialogue"])
-        return f"{prompt}\n{row['summary']}"
+        prompt = prompt_template.format(dialogue=row["dialogue"], topic="topic")
+        return f"{prompt}\n Summary: {row['summary']}"
 
     train_data["text"] = train_data.apply(format_row, axis=1)
     val_data["text"] = val_data.apply(format_row, axis=1)

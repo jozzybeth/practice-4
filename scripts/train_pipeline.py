@@ -33,19 +33,19 @@ def main(data_config: str, model_config: str, stage: str):
 
     if stage in ["prepare", "all"]:
         print("\n=== [STAGE 1/6] PREPARE DATA ===")
-        from scripts.prepare_data import prepare_data_only
+        from prepare_data import prepare_data_only
 
         prepare_data_only(data_config)
 
     if stage in ["baseline", "all"]:
         print("\n=== [STAGE 2/6] GENERATE BASELINE PREDICTIONS ===")
-        from scripts.generate_baseline import generate_baseline
+        from generate_baseline import generate_baseline
 
         generate_baseline(data_config)
 
     if stage in ["zero_shot", "all"]:
         print(f"\n=== [STAGE 3/6] INFERENCE: {model_slug} ZERO-SHOT (vLLM) ===")
-        from scripts.inference import run_vllm_inference
+        from inference import run_vllm_inference
 
         run_vllm_inference(
             model_identifier=model_cfg["base_model_name"],
@@ -56,14 +56,14 @@ def main(data_config: str, model_config: str, stage: str):
 
     if stage in ["train", "all"]:
         print(f"\n=== [STAGE 4/6] TRAIN TRANSFORMERS ({model_slug} LoRA) & MERGE ===")
-        from scripts.train_transformers import merge_weights, train_lora
+        from train_transformers import merge_weights, train_lora
 
         train_lora(data_cfg, model_cfg)
         merge_weights(model_cfg)
 
     if stage in ["lora", "all"]:
         print(f"\n=== [STAGE 5/6] INFERENCE: TRAINED {model_slug} LORA (vLLM) ===")
-        from scripts.inference import run_vllm_inference
+        from inference import run_vllm_inference
 
         run_vllm_inference(
             model_identifier=model_cfg["merged_dir"],
@@ -74,7 +74,7 @@ def main(data_config: str, model_config: str, stage: str):
 
     if stage in ["evaluate", "all"]:
         print("\n=== [STAGE 6/6] EVALUATION & LLM-JUDGE ===")
-        from scripts.evaluate_llm_judge import run_llm_judge
+        from evaluate_llm_judge import run_llm_judge
 
         run_llm_judge(data_cfg, model_cfg)
 

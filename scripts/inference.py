@@ -29,7 +29,7 @@ def run_vllm_inference(
     for i, row in tqdm(
         test.iterrows(), total=len(test), desc=f"Inference {output_csv_name}"
     ):
-        prompt = data_cfg["prompt_template"].format(dialogue=row["dialogue"])
+        prompt = data_cfg["prompt_template"].format(dialogue=row["dialogue"],topic=row["topic"])
 
         response = client.chat.completions.create(
             model=model_identifier,

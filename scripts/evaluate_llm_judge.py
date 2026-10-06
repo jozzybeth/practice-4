@@ -81,11 +81,12 @@ def run_llm_judge(data_cfg: dict, model_cfg: dict):
             for letter, m_name in mapping.items()
         }
 
-        prompt = f"""Evaluate summaries using dialogue and reference. Return JSON {{ "A": [F,R,C], ... }}.
+        prompt = f"""Evaluate summaries using dialogue, reference and topic. Return JSON {{ "A": [F,R,C], ... }}.
 F=faithfulness, R=relevance, C=conciseness (1-5).
 
 DIALOGUE: {row['dialogue']}
 REFERENCE: {row['summary']}
+TOPIC: {row['topic']}
 """ + "\n".join(f"{k}: {v}" for k, v in candidates.items())
 
         try:

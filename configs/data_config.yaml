@@ -9,12 +9,9 @@ train_sample_size: 3000
 max_length: 512
 
 prompt_template: |
-  Summarize the following dialogue.
-  Write one concise sentence describing the main event or action.
+  ""Summarize the following dialogue.
+  Topic: {topic}
+  Write a concise summary describing the main event or action in the dialogue, taking the given topic into account.
   Do not add information that is not stated in the dialogue.
   Output only the summary.
-
-  Dialogue:
-  {dialogue}
-
-  Summary:
+  Dialogue: {dialogue}""
